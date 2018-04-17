@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_post, only: [:destroy, :update, :like ]
   def new
     @post = current_user.posts.build
   end
@@ -16,15 +17,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     redirect_to posts_url && return unless @post.user_id == current_user.id
     @post.destroy
     redirect_to posts_url
   end
 
   def update
-    @post = Post.find params[:id]
-
     respond_to do |format|
       if @post.update_attributes(post_params)
         notice_message = 'Posts was successfully updated.'
@@ -35,10 +33,22 @@ class PostsController < ApplicationController
       format.json { respond_with_bip(@post) }
     end
   end
+  def like
+    if @post.liked_by current_user
+        respond_to do |format|
+          format.html { redirect_to :back }
+          format.js
+        end
+      end
+  end
 
   private
 
   def post_params
     params.require(:post).permit(:message)
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 end
