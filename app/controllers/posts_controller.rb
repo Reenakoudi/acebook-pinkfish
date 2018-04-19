@@ -25,12 +25,9 @@ class PostsController < ApplicationController
     @post = Post.find params[:id]
 
     respond_to do |format|
-      if @post.update_attributes(post_params)
-        notice_message = 'Posts was successfully updated.'
-        format.html { redirect_to(@post, notice: notice_message) }
-      else
-        format.html { render action: 'edit' }
-      end
+      @post.update_attributes(post_params)
+      notice_message = 'Posts was successfully updated.'
+      format.html { redirect_to(@post, notice: notice_message) }
       format.json { respond_with_bip(@post) }
     end
   end
