@@ -5,6 +5,10 @@
 # PinkFish
 Working in a team of 5 to implement a social media platform. [You can find the engineering project outline here.](https://github.com/makersacademy/course/tree/master/engineering_projects/rails)
 
+# Technologies Used
+ - Web framework: Ruby on Rails
+ - Testing suite: RSpec/Capybara
+
 # Trello Board
 The card wall is here: https://trello.com/b/oiLPY0VV/pinkfish
 
