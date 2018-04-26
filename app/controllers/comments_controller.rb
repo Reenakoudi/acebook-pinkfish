@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
 
-
   def create
     @post = Post.find(params[:post_id])
     comment_hash = comment_params.merge(user_id: current_user.id)
